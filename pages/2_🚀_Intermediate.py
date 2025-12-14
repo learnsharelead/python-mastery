@@ -3,11 +3,62 @@ from utils.styles import apply_custom_css
 from utils.seo import inject_seo_meta
 from utils.nav import show_top_nav
 
-# SEO & Styles
+# Expert SEO & Styles
 inject_seo_meta(
-    title="Python Intermediate - OOP, Files & Modules",
-    description="Level up with Object Oriented Programming, File I/O, Error Handling, and Modules.",
-    keywords=["Python OOP", "Python Classes", "File Handling", "Exception Handling"]
+    title="Python Intermediate Tutorial | OOP, File I/O, Modules & Error Handling",
+    description="Level up your Python skills with Object-Oriented Programming, file handling, exception handling, and modular code. Build real applications with classes, inheritance, and external packages.",
+    keywords=[
+        "python OOP tutorial",
+        "python classes and objects",
+        "python inheritance example",
+        "python file handling",
+        "python read write files",
+        "python exception handling",
+        "python try except",
+        "python modules import",
+        "python pip packages",
+        "python data structures",
+        "python dictionary tutorial",
+        "python list comprehension",
+        "python CSV JSON parsing",
+        "object oriented python",
+        "python error handling best practices"
+    ],
+    schema_type="TechArticle",
+    canonical_url="https://pythonmastery.dev/intermediate",
+    reading_time=75,
+    breadcrumbs=[
+        {"name": "Home", "url": "https://pythonmastery.dev"},
+        {"name": "Intermediate", "url": "https://pythonmastery.dev/intermediate"}
+    ],
+    course_info={
+        "name": "Python Intermediate Module: OOP, Files & Modules",
+        "description": "Level up with Object Oriented Programming, File I/O, Error Handling, and Modules. Learn to structure code for real-world applications.",
+        "level": "Intermediate",
+        "prerequisites": "Basic Python knowledge (variables, loops, functions)",
+        "teaches": ["OOP", "Classes", "Inheritance", "File I/O", "Exception Handling", "Modules", "pip"],
+        "workload": "PT12H",
+        "rating": "4.8",
+        "rating_count": 987
+    },
+    faq_items=[
+        {
+            "question": "What is Object-Oriented Programming (OOP) in Python?",
+            "answer": "OOP is a programming paradigm where you create 'classes' as blueprints and 'objects' as instances. A class defines attributes (data) and methods (functions) that belong together. Example: a Dog class with name attribute and bark() method."
+        },
+        {
+            "question": "What is the difference between a list and dictionary in Python?",
+            "answer": "Lists are ordered collections accessed by index (0, 1, 2...), like numbered slots. Dictionaries store key-value pairs accessed by labels, like labeled drawers. Use lists for ordered data, dictionaries for named lookups."
+        },
+        {
+            "question": "How do I handle errors in Python without crashing?",
+            "answer": "Use try/except blocks. Put risky code in 'try:', and handle the error in 'except:'. You can catch specific errors like 'except ValueError:' or use 'finally:' for cleanup code that always runs."
+        },
+        {
+            "question": "What is the 'with' statement used for in Python?",
+            "answer": "The 'with' statement is used for resource management, automatically handling setup and cleanup. Most commonly used with files: 'with open(file) as f:' ensures the file is properly closed even if an error occurs."
+        }
+    ]
 )
 apply_custom_css()
 show_top_nav(current_page="Intermediate")

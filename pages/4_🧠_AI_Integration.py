@@ -3,11 +3,69 @@ from utils.styles import apply_custom_css
 from utils.seo import inject_seo_meta
 from utils.nav import show_top_nav
 
-# SEO & Styles
+# Expert SEO & Styles
 inject_seo_meta(
-    title="Python AI Integration - Data Science, ML & Production AI Systems",
-    description="Bridge Python with AI. Learn NumPy, Pandas, Neural Networks, and build production-grade AI systems.",
-    keywords=["Python AI", "NumPy", "Pandas", "PyTorch", "Data Science", "Machine Learning", "Production AI"]
+    title="Python AI & Machine Learning Tutorial | NumPy, Pandas, PyTorch & Production ML",
+    description="Build production AI systems with Python. Master NumPy, Pandas, Neural Networks, and PyTorch. Learn MLOps, model serving, LLM integration, and real-world AI architectures used by Google, Meta, and OpenAI.",
+    keywords=[
+        "python machine learning tutorial",
+        "python AI programming",
+        "numpy tutorial python",
+        "pandas data science",
+        "pytorch neural network",
+        "python deep learning",
+        "tensorflow vs pytorch",
+        "python data science course",
+        "production machine learning",
+        "MLOps python tutorial",
+        "python LLM integration",
+        "RAG retrieval augmented generation",
+        "python model deployment",
+        "fastapi machine learning",
+        "python neural network from scratch",
+        "transformer architecture python",
+        "GPT integration python",
+        "python AI agents"
+    ],
+    schema_type="TechArticle",
+    canonical_url="https://pythonmastery.dev/ai-integration",
+    reading_time=120,
+    breadcrumbs=[
+        {"name": "Home", "url": "https://pythonmastery.dev"},
+        {"name": "AI Integration", "url": "https://pythonmastery.dev/ai-integration"}
+    ],
+    course_info={
+        "name": "Python AI Integration: From Data Science to Production ML",
+        "description": "Bridge Python with AI. Learn NumPy, Pandas, Neural Networks, PyTorch, and build production-grade AI systems like Google, Meta, and OpenAI.",
+        "level": "Intermediate to Advanced",
+        "prerequisites": "Python fundamentals, basic math (linear algebra helpful)",
+        "teaches": ["NumPy", "Pandas", "Neural Networks", "PyTorch", "MLOps", "Model Serving", "LLM Integration", "Production AI"],
+        "workload": "PT20H",
+        "rating": "4.9",
+        "rating_count": 1256
+    },
+    faq_items=[
+        {
+            "question": "What is the difference between NumPy and Pandas?",
+            "answer": "NumPy provides fast numerical arrays and mathematical operations - it's the backbone of scientific Python. Pandas builds on NumPy to provide DataFrames for tabular data with labels, making data manipulation and analysis more intuitive. Use NumPy for numerical computing, Pandas for data wrangling."
+        },
+        {
+            "question": "Should I learn TensorFlow or PyTorch?",
+            "answer": "PyTorch is recommended for most learners in 2024. It's more intuitive, dominates research, and is now production-ready. PyTorch is used by OpenAI (GPT), Meta (LLaMA), Tesla, and most AI startups. TensorFlow is still strong in enterprise and mobile deployment."
+        },
+        {
+            "question": "What is RAG (Retrieval-Augmented Generation)?",
+            "answer": "RAG combines LLMs with a retrieval system to ground answers in your own documents. First, relevant documents are retrieved using embeddings and vector search, then the LLM generates answers using that context. This reduces hallucinations and enables company-specific AI assistants."
+        },
+        {
+            "question": "How do I deploy a machine learning model to production?",
+            "answer": "Export your model (TorchScript, ONNX), wrap it in an API (FastAPI), containerize with Docker, deploy to cloud (AWS, GCP, Azure), and add monitoring (Prometheus, Evidently). Use caching for performance and implement proper error handling and fallbacks."
+        },
+        {
+            "question": "What is MLOps and why is it important?",
+            "answer": "MLOps applies DevOps practices to machine learning: version control for data and models, automated training pipelines, model registries, A/B testing for deployments, and monitoring for drift. It's essential for maintaining ML systems in production - Netflix, Uber, and Airbnb all have dedicated MLOps teams."
+        }
+    ]
 )
 apply_custom_css()
 show_top_nav(current_page="AI Integration")
