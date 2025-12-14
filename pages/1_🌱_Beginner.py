@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.styles import apply_custom_css
+from utils.styles import apply_custom_css, show_footer
 from utils.seo import inject_seo_meta
 from utils.nav import show_top_nav
 
@@ -547,3 +547,6 @@ while True:
     elif choice == "3": remove_task()
     elif choice == "4": break
         """, language="python")
+
+# Footer
+show_footer()

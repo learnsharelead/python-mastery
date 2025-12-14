@@ -264,3 +264,36 @@ def show_header():
     </div>
 </div>
 """, unsafe_allow_html=True)
+
+
+def show_footer():
+    """Display a professional copyright footer."""
+    current_year = 2024
+    st.markdown("---")
+    st.markdown(f"""
+    <div style="
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+    ">
+        <p style="margin: 0 0 8px 0 !important; font-size: 14px; color: #64748b;">
+            © {current_year} <strong>Python Mastery Hub</strong>. All rights reserved.
+        </p>
+        <p style="margin: 0 !important; font-size: 13px; color: #94a3b8;">
+            Created with ❤️ by <a href="mailto:vikas.singh.info@gmail.com" style="color: #3b82f6; text-decoration: none;">vikas.singh.info@gmail.com</a>
+        </p>
+        <div style="margin-top: 10px; display: flex; justify-content: center; gap: 15px;">
+            <a href="https://github.com/learnsharelead/python-mastery" target="_blank" style="color: #64748b; text-decoration: none; font-size: 13px;">
+                📦 GitHub
+            </a>
+            <span style="color: #cbd5e1;">|</span>
+            <a href="mailto:vikas.singh.info@gmail.com" style="color: #64748b; text-decoration: none; font-size: 13px;">
+                ✉️ Contact
+            </a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+

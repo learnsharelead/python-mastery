@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.styles import apply_custom_css
+from utils.styles import apply_custom_css, show_footer
 from utils.seo import inject_seo_meta
 from utils.nav import show_top_nav
 
@@ -897,3 +897,6 @@ services:
         """, language="yaml")
 
     st.success("🎉 You now have the knowledge to build production-grade AI systems used by real companies!")
+
+# Footer
+show_footer()

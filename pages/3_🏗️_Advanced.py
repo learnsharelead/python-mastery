@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.styles import apply_custom_css
+from utils.styles import apply_custom_css, show_footer
 from utils.seo import inject_seo_meta
 from utils.nav import show_top_nav
 
@@ -699,3 +699,5 @@ class Order:
 order = Order(order_id=1, items=["Book", "Pen"], total=25.99)
         """, language="python")
 
+# Footer
+show_footer()

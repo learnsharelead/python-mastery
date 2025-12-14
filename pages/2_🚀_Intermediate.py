@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.styles import apply_custom_css
+from utils.styles import apply_custom_css, show_footer
 from utils.seo import inject_seo_meta
 from utils.nav import show_top_nav
 
@@ -434,3 +434,6 @@ import requests
 response = requests.get("https://api.github.com")
 print(response.status_code)  # 200
         """, language="python")
+
+# Footer
+show_footer()

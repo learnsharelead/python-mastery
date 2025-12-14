@@ -2,7 +2,7 @@ import streamlit as st
 import sys
 import os
 
-from utils.styles import apply_custom_css
+from utils.styles import apply_custom_css, show_footer
 from utils.seo import inject_seo_meta
 from utils.nav import show_top_nav
 
@@ -149,3 +149,6 @@ with f2:
     st.success("**Project Based** — Each module ends with a real-world mini project.")
 with f3:
     st.warning("**Modern Stack** — Updated for Python 3.12+ with type hints.")
+
+# Footer
+show_footer()
