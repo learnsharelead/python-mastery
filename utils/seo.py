@@ -21,17 +21,19 @@ def inject_seo_meta(
     Expert-level SEO injection for Streamlit pages.
     
     Implements:
-    - JSON-LD Structured Data (Schema.org)
-    - Open Graph meta tags
-    - Twitter Card meta tags
-    - Semantic HTML for crawlers
+    - JSON-LD Structured Data (Schema.org) - Works in Streamlit
+    - Hidden semantic HTML for crawlers
     - Rich snippets for SERP features
     - FAQ Schema for featured snippets
     - Course Schema for educational content
     - BreadcrumbList for navigation
+    
+    Note: Streamlit doesn't support traditional meta tags in <head>.
+    This implementation focuses on JSON-LD structured data which
+    search engines can read from the page body.
     """
     
-    # Set page config
+    # Set page config with SEO-optimized title
     st.set_page_config(
         page_title=title,
         page_icon="🐍",
@@ -212,7 +214,7 @@ def inject_seo_meta(
         }
     }
     
-    # Combine all schemas into a graph
+    # Combine all schemas
     schemas = [main_schema, website_schema, org_schema]
     if breadcrumb_schema:
         schemas.append(breadcrumb_schema)
@@ -221,84 +223,32 @@ def inject_seo_meta(
     if course_schema:
         schemas.append(course_schema)
     
-    # Build meta tags HTML
-    meta_tags = f"""
-    <!-- Primary Meta Tags -->
-    <title>{title}</title>
-    <meta name="title" content="{title}">
-    <meta name="description" content="{description}">
-    <meta name="keywords" content="{', '.join(keywords) if keywords else ''}">
-    <meta name="author" content="{author}">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="language" content="English">
-    <meta name="revisit-after" content="7 days">
-    <link rel="canonical" href="{canonical_url}">
+    # Build hidden semantic content with JSON-LD
+    # All elements are completely hidden but readable by search engines
+    breadcrumb_html = ""
+    if breadcrumbs:
+        crumbs = "".join([f'<li><a href="{c.get("url", "#")}">{c.get("name")}</a></li>' for c in breadcrumbs])
+        breadcrumb_html = f'<nav aria-label="breadcrumb"><ol>{crumbs}</ol></nav>'
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="{canonical_url}">
-    <meta property="og:title" content="{title}">
-    <meta property="og:description" content="{description}">
-    <meta property="og:image" content="{og_image}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Python Mastery Hub">
-    <meta property="og:locale" content="en_US">
-    <meta property="article:published_time" content="{date_published}">
-    <meta property="article:modified_time" content="{date_modified}">
-    <meta property="article:author" content="{author}">
-    <meta property="article:section" content="Programming">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{canonical_url}">
-    <meta name="twitter:title" content="{title}">
-    <meta name="twitter:description" content="{description}">
-    <meta name="twitter:image" content="{og_image}">
-    <meta name="twitter:site" content="@pythonmastery">
-    <meta name="twitter:creator" content="@pythonmastery">
-    
-    <!-- Additional SEO -->
-    <meta name="googlebot" content="index, follow">
-    <meta name="bingbot" content="index, follow">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    """
-    
-    # Keywords as hidden semantic tags
-    keyword_tags = ""
-    if keywords:
-        for kw in keywords[:10]:  # Limit to 10 keywords
-            keyword_tags += f'<meta property="article:tag" content="{kw}">\n'
-    
-    # JSON-LD structured data
+    # JSON-LD scripts (these are properly parsed by search engines)
     json_ld_scripts = ""
     for schema in schemas:
-        json_ld_scripts += f'<script type="application/ld+json">{json.dumps(schema, indent=2)}</script>\n'
+        json_ld_scripts += f'<script type="application/ld+json">{json.dumps(schema)}</script>\n'
     
-    # Hidden semantic HTML for crawlers
-    semantic_html = f"""
-    <div style="display:none;" aria-hidden="true">
-        <h1 id="page-title">{title}</h1>
-        <p id="page-description">{description}</p>
-        <nav aria-label="breadcrumb">
-            <ol>{"".join([f'<li><a href="{c.get("url", "#")}">{c.get("name")}</a></li>' for c in (breadcrumbs or [{"name": "Home", "url": base_url}])])}</ol>
-        </nav>
+    # Inject everything in a completely hidden container
+    st.markdown(f"""
+    <div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" aria-hidden="true">
+        {json_ld_scripts}
         <article itemscope itemtype="https://schema.org/{schema_type}">
-            <meta itemprop="headline" content="{title}">
-            <meta itemprop="description" content="{description}">
+            <h1 itemprop="headline">{title}</h1>
+            <p itemprop="description">{description}</p>
             <meta itemprop="datePublished" content="{date_published}">
             <meta itemprop="dateModified" content="{date_modified}">
+            <meta itemprop="author" content="{author}">
+            <meta itemprop="keywords" content="{', '.join(keywords) if keywords else ''}">
+            {breadcrumb_html}
         </article>
     </div>
-    """
-    
-    # Inject all SEO elements
-    st.markdown(f"""
-    {meta_tags}
-    {keyword_tags}
-    {json_ld_scripts}
-    {semantic_html}
     """, unsafe_allow_html=True)
 
 
@@ -326,9 +276,11 @@ def inject_faq_section(faq_items: list, expanded: bool = False):
                 }
             })
     
-    # Inject FAQ schema
+    # Inject FAQ schema (hidden)
     st.markdown(f"""
-    <script type="application/ld+json">{json.dumps(faq_schema)}</script>
+    <div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+        <script type="application/ld+json">{json.dumps(faq_schema)}</script>
+    </div>
     """, unsafe_allow_html=True)
 
 
@@ -354,5 +306,7 @@ def inject_how_to_schema(title: str, steps: list, total_time: str = "PT30M"):
         })
     
     st.markdown(f"""
-    <script type="application/ld+json">{json.dumps(how_to_schema)}</script>
+    <div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+        <script type="application/ld+json">{json.dumps(how_to_schema)}</script>
+    </div>
     """, unsafe_allow_html=True)
